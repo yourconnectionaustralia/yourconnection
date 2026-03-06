@@ -1,0 +1,8 @@
+Add your Gridular font files here:
+- Gridular-Regular.woff2
+- Gridular-Regular.woff
+- Gridular-Bold.woff2
+- Gridular-Bold.woff
+
+The Ven Agency logo on the site uses this font.
+The CSS will fall back to DM Sans if these files are missing.
