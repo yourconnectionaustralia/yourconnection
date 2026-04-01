@@ -25,12 +25,16 @@ export async function onRequestPost(context) {
       });
     }
 
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 8000);
+
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${RESEND_API_KEY}`,
         'Content-Type': 'application/json',
       },
+      signal: controller.signal,
       body: JSON.stringify({
         from: 'Your Connection <info@yourconnection.com.au>',
         to: ['james@ven.com.au'],
@@ -49,6 +53,8 @@ ${message || 'No message provided'}
         `.trim()
       }),
     });
+
+    clearTimeout(timeoutId);
 
     if (!res.ok) {
       const err = await res.text();
